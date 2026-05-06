@@ -1,0 +1,60 @@
+export PATH="/opt/homebrew/bin:$PATH"
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+if [[ -r /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme ]]; then
+  source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+[[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias ls="eza --icons=always"
+
+alias gs="git status --short"
+alias gp="git push"
+alias ga="git add"
+alias gc="git commit"
+alias gi="git init"
+alias gu="git pull"
+alias gcl="git clone"
+alias gb="git branch"
+alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' ' "
+alias gl="git log --all --graph --decorate --abbrev-commit --date=relative --pretty=format:'%C(auto)%h %C(bold blue)%d%C(reset) %s %C(white)- %an, %ar'"
+
+alias work='timer 45m && terminal-notifier -message "Pomodoro" -title "Work Timer is up! Take a Break"'
+alias rest='timer 15m && terminal-notifier -message "Pomodoro" -title "Break is over! Get back to work"'
+alias run="cronitor dash"
+alias doom="$HOME/.config/emacs/bin/doom"
+
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+command -v brew >/dev/null 2>&1 && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export PATH="$PATH:$HOME/.npm-global/bin"
+export PATH="$PATH:$HOME/.local/bin"
+
+export BUN_INSTALL="$HOME/.bun"
+[[ -d "$BUN_INSTALL/bin" ]] && export PATH="$BUN_INSTALL/bin:$PATH"
+[[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
+
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+[[ -f "$HOME/.aftman/env" ]] && . "$HOME/.aftman/env"
+[[ -f "$HOME/.ghcup/env" ]] && . "$HOME/.ghcup/env"
+
