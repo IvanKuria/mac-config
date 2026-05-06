@@ -2,22 +2,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "node \"$HOME/.claude/hooks/gsd-statusline.js\""
-  },
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
@@ -42,4 +26,3 @@
   "skipAutoPermissionPrompt": true,
   "agentPushNotifEnabled": true
 }
-
